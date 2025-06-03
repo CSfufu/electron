@@ -1,0 +1,35 @@
+{
+  "name": "my-desktop-app",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "build:app": "electron-builder --publish=never"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^23.6.0"
+  },
+  "build": {
+    "appId": "com.mycompany.myapp",
+    "productName": "MyApp",
+    "files": [
+      "main.js",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "target": ["dmg", "zip"]
+    },
+    "win": {
+      "target": ["nsis", "zip"]
+    },
+    "linux": {
+      "target": ["AppImage"]
+    }
+  }
+}
