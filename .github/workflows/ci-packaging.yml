@@ -3,9 +3,7 @@ name: Electron CI/CD
 on:
   push:
     branches:
-      - main   
-  # release:
-  #   types: [published]
+      - main
 
 jobs:
   build-and-publish:
@@ -29,12 +27,11 @@ jobs:
         run: npm ci
 
       - name: Build Electron App for ${{ matrix.platform }}
-        run: |
-          npm run build:app
+        run: npm run build:app
 
       - name: Upload artifact to GitHub
         if: success()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: MyApp-${{ matrix.platform }}
           path: release/**
@@ -45,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download all build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           path: artifacts
 
@@ -53,7 +50,7 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ github.run_number }}-build   
+          tag_name: v${{ github.run_number }}-build
           release_name: "MyApp Release ${{ github.run_number }}"
           draft: false
           prerelease: false
